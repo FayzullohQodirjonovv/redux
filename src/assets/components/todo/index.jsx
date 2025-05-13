@@ -10,12 +10,12 @@ const Todo = () => {
   const { data } = useSelector((state) => state.todoslice);
   const dispatch = useDispatch();
   
-  // Initialize form
   const [form] = Form.useForm();
 
   const sumbit = (values) => {
-    dispatch(getdata(values.todo)); 
-    form.resetFields();  // Reset the fields after form submission
+      const newTodo = { text: values.todo };
+    dispatch(getdata(newTodo)); 
+    form.resetFields(); 
   };
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Todo = () => {
 
       <div className='w-[50%] m-auto mt-5'>
         <Form
-          form={form}  // Set form instance
+          form={form} 
           onFinish={sumbit}
           className='flex items-center gap-5'
         >
@@ -41,8 +41,9 @@ const Todo = () => {
           >
             <Input placeholder='Text...' />
           </Form.Item>
-          <Button htmlType='submit'>Qo‘shmoq</Button>
+          <Button className='koko mt-[-22px]' htmlType='submit' type='primary'>Qo‘shmoq</Button>
         </Form>
+
         {data.map((value) => (<Card key={value.id} {...value} />))}
       </div>
     </div>
